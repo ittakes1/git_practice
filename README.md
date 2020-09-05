@@ -32,7 +32,7 @@ $ git commit -m "Story 182: Fix benchmarks for speed" # -m 選項後方直接輸
 [master 463dc4f] Story 182: Fix benchmarks for speed  ← 提交到哪個分支（master）、提交的 SHA-1 校驗碼（463dc4f）
 2 files changed, 2 insertions(+) ←有多少檔案被更動，以及統計此提交有多少列被新增和被移除
 create mode 100644 README
-```bash
+```
 
 # 將變更發送到遠端repo (例如github.com)
 ```bash
