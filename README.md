@@ -7,6 +7,12 @@ $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
 ```
 
+# 列出個人設定
+```bash
+git config --list
+```
+git config --list命令列出所有 Git 在目前位置能找到的設定值:
+
 # 追蹤新的檔案
 要開始追蹤一個新的檔案,可以使用 git add 命令; 要開始追蹤 README 檔案,你可以執行:
 ```bash
@@ -38,3 +44,11 @@ create mode 100644 README
 ```bash
 $git push origin master
 ```
+
+# 三種取得 Git 命令說明文件的方法:
+```bash
+$ git help <verb>
+$ git <verb> --help
+$ man git-<verb>
+```
+例如 $git help config
