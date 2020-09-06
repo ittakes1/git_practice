@@ -91,12 +91,19 @@ $ git commit  # 這麼做會啟動你選定的編輯器
 或者
 ```
 $ git commit -m "Story 182: Fix benchmarks for speed" # -m 選項後方直接輸入提交訊息
-[master 463dc4f] Story 182: Fix benchmarks for speed  ← 提交到哪個分支（master）、提交的 SHA-1 校驗碼（463dc4f）
-2 files changed, 2 insertions(+) ←有多少檔案被更動，以及統計此提交有多少列被新增和被移除
+[master 463dc4f] Story 182: Fix benchmarks for speed  
+2 files changed, 2 insertions(+) 
 create mode 100644 README
 ```
+[master 463dc4f] Story 182: Fix benchmarks for speed  
 
-### 略過預存區 git add + git commit一起用
+提交到哪個分支（master）、提交的 SHA-1 校驗碼（463dc4f）
+
+2 files changed, 2 insertions(+) 
+
+有多少檔案被更動，以及統計此提交有多少列被新增和被移除
+
+### 略過預存 git add + git commit一起用
 在 git commit 命令加上 -a 選項，使 Git 在提交前自動預存所有已追蹤的檔案，讓你略過 git add 步驟：`
 ```
 $ git commit -a -m 'added new benchmarks'
@@ -170,5 +177,12 @@ $ git diff --staged
 ```
 git difftool --tool-help
 git difftool --tool=vimdiff
+```
+
+## 移除檔案
+
+要從 Git 中刪除一個檔案，你需要將它從已追蹤檔案中移除（更準確地說，是從預存區中移除），然後再提交； git rm 命令可完成此工作，它同時也會將該檔案從工作目錄中移除，如此它之後也不會身為未追蹤檔案而被你看到
+```
+$ git rm PROJECTS.md
 ```
 
