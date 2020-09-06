@@ -1,5 +1,9 @@
 # git_practice
-repository 倉庫
+
+repository, repo: 倉庫
+commit: 遞交 提交
+tracked/untracked
+add
 
 ## 初始設定
 安裝以後，設定使用者名稱和email
@@ -8,17 +12,71 @@ $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
 ```
 
-## 追蹤新的檔案
+## 建立專案
+
+1. 把現有專案匯入到git中
+
+2. 從伺服器上複製現有的Git倉庫
+
+### 把現有專案匯入到git中
+在專案目錄底下：
+```
+$ git init
+```
+開始追蹤目錄底下所有檔案：
+```
+git add .
+```
+遞交commit
+```
+git commit -m "關於這次變更的敘述"
+```
+
+### 複製現有倉庫
+
+git clone 下載遠端repo
+
+1. 使用https
+```
+$ git clone https://github.com/ittakes1/git_practice.git git_practice
+```
+說明 git clone https://網址/帳號名/項目名.git 目錄名
+目錄名可以自行設定，如果不寫，項目名就是項目名
+
+2. 使用ssh
+```
+$ git clone git@github.com:ittakes1/git_practice.git
+```
+說明 git clone git@網址:帳號名/項目名.git
+
+## Git倉庫中記錄變更
+
+工作目錄下的每一個檔案不是tracked已追蹤就是untracked未追蹤
+
+已追蹤的檔案三種狀態
+1. 已修改
+2. 未修改
+3. 已預存
+
+
+### git add 命令追蹤單一的新檔案
 要開始追蹤一個新的檔案,可以使用 git add 命令; 要開始追蹤 README 檔案,你可以執行:
 ```bash
 $ git add README.md
 ```
+
+### git status 命令檢查狀態
 如果再次執行檢查狀態命令,可以看到 README.md 檔案現在是準備好被提交的「已追蹤」和「已預存」狀態:
 ```bash
 $ git status
 ```
+輸出
+```
 On branch master
 Your branch is up-to-date with 'origin/master'.
+```
+簡潔版本 -s
+
 
 ## 預存修改過的檔案 git add
 
@@ -53,7 +111,7 @@ $ git clone git@github.com:ittakes1/git_practice.git
 ```
 說明 git clone git@網址:帳號名/項目名.git
 
-## .gitignore檔案
+## 忽略檔案 .gitignore檔案
 gitignore - Specifies intentionally untracked files to ignore
 
 * Patterns which should be version-controlled and distributed to other repositories via clone (i.e., files that all developers will want to ignore) should go into a `.gitignore` file.
@@ -64,13 +122,15 @@ gitignore - Specifies intentionally untracked files to ignore
 
 ### PATTERN FORMAT
 
-* A blank line matches no files, so it can serve as a separator for readability.
+* 空白行不處理
 
-* A line starting with # serves as a comment. Put a backslash ("\") in front of the first hash for patterns that begin with a hash.
+* 以#開頭表示註解 Put a backslash ("\") in front of the first hash for patterns that begin with a hash.
 
-* Trailing spaces are ignored unless they are quoted with backslash ("\").
+* 後綴空白不處理 unless they are quoted with backslash ("\").
 
-* An optional prefix "!" which negates the pattern; any matching file excluded by a previous pattern will become included again. It is not possible to re-include a file if a parent directory of that file is excluded. Git doesn’t list excluded directories for performance reasons, so any patterns on contained files have no effect, no matter where they are defined. Put a backslash ("\") in front of the first "!" for patterns that begin with a literal "!", for example, "\!important!.txt".
+* !邏輯非 which negates the pattern; any matching file excluded by a previous pattern will become included again. It is not possible to re-include a file if a parent directory of that file is excluded. Git doesn’t list excluded directories for performance reasons, so any patterns on contained files have no effect, no matter where they are defined. Put a backslash ("\") in front of the first "!" for patterns that begin with a literal "!", for example, "\!important!.txt".
 
-* The slash / is used as the directory separator. Separators may occur at the beginning, middle or end of the .gitignore search pattern.
+* 目錄分隔符號/ is used as the directory separator. Separators may occur at the beginning, middle or end of the .gitignore search pattern.
+
+* glob模式： *, [abc], ?
 
