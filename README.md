@@ -634,25 +634,199 @@ develop 平行分支，用於開發
 
 ![](./lr-branches-2.png)
 
+例子
 
 ![](./topic-branches-1.png)
+
+
 ![](./topic-branches-2.png)
+
+以上都是本地分支
+
+## 遠端分支
+
+遠端分支是指向遠端倉庫的分支的指標，存於本機且無法被移動。 與伺服器連線後會自動更新。
+(remote)/(branch)
+
+origin/master
+
+master
+
 ![](./remote-branches-1.png)
+
+產生偏離
+
 ![](./remote-branches-2.png)
+
+與伺服器同步： git fetch origin
+
 ![](./remote-branches-3.png)
+
+多伺服器
+
+1. origin
+2. teamone
+
 ![](./remote-branches-4.png)
+
+teamone資料比origin舊
+git fetch teamone後，Git不會抓到新資料
+
 ![](./remote-branches-5.png)
+
+## 發送
+
+A 發送分支fomefix到origin
+
+```
+git push origin somefix
+git push origin somefix:somefix
+git push origin 本地分支:遠端分支
+```
+
+B 到origin抓資料，也會抓到分支指標
+
+```
+git fetch origin
+```
+B要建立自己的分支somefix，執行
+```
+git checkout -b somefix origin/somefix
+git checkout -b 新分支名 origin/somefix
+```
+
+## 追蹤分支 tracking branch, upstream branch
+
+clone 遠端 repo時預設建立，追蹤origin/master分支，追蹤其他分支，用上面的方法。
+
+追蹤哪些分支？
+```
+git branch -vv
+```
+
+### 擷取
+
+git fetch
+
+git pull = git fetch + git merge
+
+### 刪除遠端分支
+
+git push origin --delete somefix
+
+## 變基 rebase
+
+把變更從某分支整合到另一分支
+1. merge
+2. rebase
+
+### rebase操作
+
 ![](./basic-rebase-1.png)
+
+merge:三方合併C4, C3, C2變成C5
+
 ![](./basic-rebase-2.png)
+
+rebase
+```
+$ git checkout experiment
+$ git rebase master
+```
+原理：找到C3,C4共同祖先C2，取得diff，在C3引用變更 C4'
+
 ![](./basic-rebase-3.png)
+
+回到master分支進行fast-forward merge:
+```
+$ git checkout master
+$ git merge experiment
+```
+
 ![](./basic-rebase-4.png)
+
+rebase C4'與merge C5結果相同，但rebase歷史較簡潔只有一條線，看不出原本有分叉
+
+在本機開發後，提交到origin/master，使用rebase不勞維護者費心整合
+
+## 其他rebase操作
+
+
 ![](./interesting-rebase-1.png)
+
+分支server, 又分支client，合併client到master，不動server
+
+```
+$ git rebase --onto master server client
+```
+
 ![](./interesting-rebase-2.png)
+
+對master fast-forward
+
+```
+$ git checkout master
+$ git merge client
+```
+
 ![](./interesting-rebase-3.png)
+
+把server也整合進來，不用回到master(basebranch)，在server(topicbranch)上可下指令
+```
+$ git rebase master server
+$ git rebase [basebranch] [topicbranch]
+```
+
 ![](./interesting-rebase-4.png)
+
+fast-forward basebranch
+```
+$ git checkout master
+$ git merge server
+```
+
 ![](./interesting-rebase-5.png)
+
+最後刪掉已被整合的branch
+
+```
+$ git branch -d client
+$ git branch -d server
+```
+### rebase的潛在危害
+
+*Do not rebase commits that exist outside your repository.*
+*不要對本機倉庫之外的commit做rebase!!*
+
+A在本機做修改
+
 ![](./perils-of-rebasing-1.png)
+
+B做開發，合併，push到遠端，A fetch到本機，並將遠端commitC6與目前工作C3合併為C7
 ![](./perils-of-rebasing-2.png)
+
+*接下來B做rebase到C4'，再git push --force*，A fetch到新commit
+
 ![](./perils-of-rebasing-3.png)
+
+如果A git pull：(fetch + merge)就會完蛋
 ![](./perils-of-rebasing-4.png)
+
+A git log 會看到兩個commit有同樣作者，日期，commit資訊
+
+### 只在有需要時rebase
+
+A 不用merge (git pull)，改用git rebase teamone/master
+
+![](./perils-of-rebasing-3.png)
+
+Git判斷
+
+* 本機repo: C2, C3, C4, C6, C7
+* 還沒merge: C2, C3, C4
+* 沒有在teamone/master上: C2, C3 (C4已被更新C4')
+
+只commit C2, C3
+
+
 ![](./perils-of-rebasing-5.png)
