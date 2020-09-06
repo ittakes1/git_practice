@@ -1,7 +1,13 @@
 # Markdown語言
+
+Markdown語言裡，用分行符號，最後顯示不會產生斷行，必須用空白行分開
+
 ## 表格表示
 
-pipe | 用於分開存儲格
+pipe | 用於分開存儲格，直線
+
+dash - 用於分開標題列，橫線，三個以上
+
 Colons : 用於欄位對齊 
 ```
 
@@ -20,6 +26,8 @@ Markdown | Less | Pretty
 *Still* | `renders` | **nicely**
 1 | 2 | 3
 ```
+
+顯示結果
 
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
