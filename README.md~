@@ -42,7 +42,7 @@ create mode 100644 README
 
 # 將變更發送到遠端repo (例如github.com)
 ```bash
-$ git push origin master
+$git push origin master
 ```
 
 # 三種取得 Git 命令說明文件的方法:
