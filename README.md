@@ -621,7 +621,15 @@ If you are sure you want to delete it, run 'git branch -D testing'.
 
 如果你確實想要刪除該分支並丟掉那個工作成果，可以用 -D 選項來強制執行，就像上面訊息中所提示的。
 
+## 長期分支
+
+master 穩定版程式
+
+develop 平行分支，用於開發
+
 ![](./lr-branches-2.png)
+
+
 ![](./topic-branches-1.png)
 ![](./topic-branches-2.png)
 ![](./remote-branches-1.png)
