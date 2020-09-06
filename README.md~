@@ -15,15 +15,12 @@ $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
 ```
 
-<<<<<<< HEAD
-# 列出個人設定
+### 列出個人設定
 ```bash
 git config --list
 ```
 git config --list命令列出所有 Git 在目前位置能找到的設定值:
 
-# 追蹤新的檔案
-=======
 ## 建立專案
 
 1. 把現有專案匯入到git中
@@ -88,7 +85,7 @@ $ git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
 ```
-簡潔版本 -s
+簡潔版本: git status -s
 
 
 ## 預存修改過的檔案 git add
@@ -126,15 +123,13 @@ $ git commit -a -m 'added new benchmarks'
 $ git push origin master
 ```
 
-# 三種取得 Git 命令說明文件的方法:
+### 三種取得 Git 命令說明文件的方法:
 ```bash
 $ git help <verb>
 $ git <verb> --help
 $ man git-<verb>
 ```
-<<<<<<< HEAD
 例如 $git help config
-=======
 
 ## git clone 下載遠端repo
 1. 使用https
@@ -243,4 +238,3 @@ git reflog
 
 
 git merge --no-ff heroku/master
->>>>>>> 28eb1e99072df32b7b1513de76d97ee1ca010b1b

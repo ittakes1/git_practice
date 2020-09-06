@@ -69,7 +69,6 @@ $ git clone git@github.com:ittakes1/git_practice.git
 
 
 ### git add 命令追蹤單一的新檔案
->>>>>>> 28eb1e99072df32b7b1513de76d97ee1ca010b1b
 要開始追蹤一個新的檔案,可以使用 git add 命令; 要開始追蹤 README 檔案,你可以執行:
 ```bash
 $ git add README.md
