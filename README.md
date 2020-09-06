@@ -38,3 +38,13 @@ create mode 100644 README
 ```bash
 $git push origin master
 ```
+
+# git clone 
+使用https
+```
+$ git clone https://github.com/ittakes1/git_practice.git
+'''
+使用ssh
+```
+$ git clone git@github.com:ittakes1/git_practice.git
+```
