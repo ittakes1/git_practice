@@ -186,3 +186,40 @@ git difftool --tool=vimdiff
 $ git rm PROJECTS.md
 ```
 
+## 看歷史記錄
+### 看log
+最新的在上面
+```
+git log
+
+git log --pretty=short
+
+git log --graph 圖示分支
+```
+
+### 看分支 git branch
+
+git branch
+
+git branch -a 顯示local and remote
+創建,切換分支 git checkout -b
+
+git checkout -b list-dict 等於 git branch list-dict 加 git checkout list-dict
+切換到分支
+
+git checkout master 到master
+
+git checkout - 到上一個
+合併分支 list-dict 到 master
+
+git checkout master
+
+git merge —no-ff list-dict
+回溯舊版 git reset
+
+看log
+
+git reflog
+
+
+git merge --no-ff heroku/master
