@@ -38,7 +38,7 @@ $ man git-<verb>
 
 2. 從伺服器上複製現有的Git倉庫
 
-### 把現有專案匯入到git中
+### 1. 把現有專案匯入到git中
 在專案目錄底下：
 ```
 $ git init
@@ -52,7 +52,7 @@ git add .
 git commit -m "關於這次變更的敘述"
 ```
 
-### 複製現有倉庫
+### 2. 複製現有倉庫
 
 git clone 下載遠端repo
 
@@ -95,7 +95,7 @@ $ git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
 ```
-簡潔版本: git status -s
+簡潔版本: `git status -s`
 
 
 ## 預存修改過的檔案 git add
@@ -132,19 +132,6 @@ $ git commit -a -m 'added new benchmarks'
 ```bash
 $ git push origin master
 ```
-
-## git clone 下載遠端repo
-1. 使用https
-```
-$ git clone https://github.com/ittakes1/git_practice.git
-```
-說明 git clone https://網址/帳號名/項目名.git
-
-2. 使用ssh
-```
-$ git clone git@github.com:ittakes1/git_practice.git
-```
-說明 git clone git@網址:帳號名/項目名.git
 
 ## 忽略檔案 .gitignore檔案
 gitignore - Specifies intentionally untracked files to ignore
@@ -239,4 +226,101 @@ git merge —no-ff list-dict
 git reflog
 
 
-git merge --no-ff heroku/master
+## 使用遠端倉庫，與他人協作
+
+### 顯示遠端倉庫
+
+git remote
+
+### 增加遠端倉庫
+git remote add [shortname] [url]
+
+
+### 擷取資料
+git fetch [remote-name]
+
+git fetch 只會把資料擷取到本機倉庫，不會自動合併資料，也不會動目錄下資料
+
+git pull 自動取得遠端資料，並且合併入本機分支
+
+### 發送資料到遠端倉庫
+git push origin master
+
+前提
+
+1. 有權寫入
+2. 沒別人早於你發送, 否則要處理合併衝突
+
+### 檢查遠端倉庫
+git remote show origin
+
+### 刪除，改名遠端倉庫
+git remote rename
+git remote rm
+
+## 標記 將特定歷史版本標記為重要版本
+
+### 列舉標籤
+git tag
+
+### 建立標籤
+
+* lightweight 輕量標籤
+
+可以視為不變的分支
+
+* annotated 註釋標籤
+
+計算校正碼，記錄標記者名字，標記訊息...
+
+
+### 註釋標籤
+git tag -a v1.0 -m "版本 1.0"
+git tag
+git show v1.0
+
+### 輕量標籤
+git tag v1.0-1w
+git tag
+
+### 補加標籤
+git log --pretty=oneline
+git tag -a v0.8xxxxx(校正碼)
+
+## git 別名
+git config --global alias.ci checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.last 'log -l HEAD'
+...
+
+
+## 分支機制
+
+Git 保存的不是變更集或者差異內容，而是一系列快照。當發起提交時，Git儲存的是物件commit object，該物件內容包含一個指標，用來代表已預存的快照內容； 這個物件內容還包含「作者名字和電子郵件」、「你輸入的訊息內容」、「指向前一個提交的指標（該提交的親代提交）」：沒有親代（parent）提交表示它是初始的第一個提交，一般情況下只有一個親代提交，超過一個親代提交表示它是從二個以上的分支合併而來的。
+預存 將檔案存到暫存區
+
+
+### 合併衝突處理
+```
+$ git status
+On branch master
+Your branch and 'origin/master' have diverged,
+and have 2 and 10 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+	new file:   .gitignore
+	new file:   Markdown.md
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   README.md
+```
+
+以git merge處理衝突

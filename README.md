@@ -249,7 +249,7 @@ git push origin master
 前提
 
 1. 有權寫入
-2. 沒別人早於你發送
+2. 沒別人早於你發送, 否則要處理合併衝突
 
 ### 檢查遠端倉庫
 git remote show origin
@@ -297,9 +297,13 @@ git config --global alias.last 'log -l HEAD'
 
 
 ## 分支機制
-當發起提交時，Git儲存的是物件commit object
+
+Git 保存的不是變更集或者差異內容，而是一系列快照。當發起提交時，Git儲存的是物件commit object，該物件內容包含一個指標，用來代表已預存的快照內容； 這個物件內容還包含「作者名字和電子郵件」、「你輸入的訊息內容」、「指向前一個提交的指標（該提交的親代提交）」：沒有親代（parent）提交表示它是初始的第一個提交，一般情況下只有一個親代提交，超過一個親代提交表示它是從二個以上的分支合併而來的。
+
 預存 將檔案存到暫存區
 
+![alt text][1]
+[1]: commit-and-tree.png
 
 ### 合併衝突處理
 ```
@@ -321,3 +325,5 @@ Unmerged paths:
   (use "git add <file>..." to mark resolution)
 	both modified:   README.md
 ```
+
+以git merge處理衝突
