@@ -286,18 +286,23 @@ git tag
 
 
 ### 註釋標籤
+```
 git tag -a v1.0 -m "版本 1.0"
 git tag
 git show v1.0
+```
 
 ### 輕量標籤
+```
 git tag v1.0-1w
 git tag
+```
 
 ### 補加標籤
+```
 git log --pretty=oneline
 git tag -a v0.8xxxxx(校正碼)
-
+```
 
 
 ## 分支機制
