@@ -300,11 +300,58 @@ git config --global alias.last 'log -l HEAD'
 
 Git 保存的不是變更集或者差異內容，而是一系列快照。當發起提交時，Git儲存的是物件commit object，該物件內容包含一個指標，用來代表已預存的快照內容； 這個物件內容還包含「作者名字和電子郵件」、「你輸入的訊息內容」、「指向前一個提交的指標（該提交的親代提交）」：沒有親代（parent）提交表示它是初始的第一個提交，一般情況下只有一個親代提交，超過一個親代提交表示它是從二個以上的分支合併而來的。
 
-預存 將檔案存到暫存區
+
+你的 Git 版本庫現在有五個物件：三個 blob 物件用來儲存檔案內容、一個樹物件用來列出目錄的內容並紀錄各個檔案所對應的 blob 物件、一個提交用來記錄根目錄的樹物件和其他提交資訊。
+
 
 ![alt text][1]
 
 [1]: ./commit-and-tree.png "test"
+
+如果你做一些修改並再次提交，這次的提交會再包含一個指向上次提交的指標（譯注：即下圖中的 parent 欄位）。
+
+![alt text][2]
+
+[2]: ./commits-and-parents.png
+
+Git 分支其實只是一個指向某提交的可移動輕量級指標， Git 預設分支名稱是 master， 隨著不斷地製作提交，master 分支會為你一直指向最後一個提交， 它在每次提交的時候都會自動向前移動。
+
+![alt text][3]
+
+[3]:./branch-and-history.png
+
+### 建立新分支
+
+建立一個新分支會發生什麼事呢？ 答案很簡單，建立一個新的、可移動的指標； 比如新建一個 testing 分支， 可以使用 git branch 命令：
+```
+$ git branch testing
+```
+這會在目前提交上新建一個指標。
+
+![](./two-branches.png)
+
+Git 如何知道你目前在哪個分支上工作的呢？ 其實它保存了一個名為 HEAD 的特別指標； 在 Git 中，它就是一個指向你正在工作中的本地分支的指標， 所以在這個例子中，你仍然在 master 分支上工作； 執行 git branch 命令，只是「建立」一個新的分支——它並不會切換到這個分支。
+
+![](./head-to-master.png)
+
+你可以很輕鬆地看到分支指標指向何處，只需透過一個簡單的 git log 命令， 加上 --decorate 選項。
+```
+$ git log --oneline --decorate
+f30ab (HEAD -> master, testing) add feature #32 - ability to add new formats to the central interface
+34ac2 Fixed bug #1328 - stack overflow under certain conditions
+98ca9 The initial commit of my project
+```
+你可以看到「master」和「testing」分支就顯示在 f30ab 提交旁邊。
+
+### 在分支之間切換
+要切換到一個已經存在的分支，你可以執行 git checkout 命令， 讓我們切換到新的 testing 分支：
+```
+$ git checkout testing
+```
+這會移動 HEAD 並指向 testing 分支。
+
+![](./head-to-testing.png)
+
 
 ### 合併衝突處理
 ```
