@@ -1,4 +1,5 @@
 ## git_practice
+repository 倉庫
 
 # 初始設定
 安裝以後，設定使用者名稱和email
@@ -39,12 +40,13 @@ create mode 100644 README
 $git push origin master
 ```
 
-# git clone 
-使用https
+# git clone 下載遠端repo
+1. 使用https
 ```
 $ git clone https://github.com/ittakes1/git_practice.git
-'''
-使用ssh
+```
+
+2. 使用ssh
 ```
 $ git clone git@github.com:ittakes1/git_practice.git
 ```
