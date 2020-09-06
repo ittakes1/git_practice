@@ -796,7 +796,8 @@ $ git branch -d server
 ### rebase的潛在危害
 
 *Do not rebase commits that exist outside your repository.*
-*不要對本機倉庫之外的commit做rebase!!*
+
+*不要對本機倉庫之外的commit做rebase, 只rebase你自己的commit，不要rebase remote repo的commit*
 
 A在本機做修改
 
