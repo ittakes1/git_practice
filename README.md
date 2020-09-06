@@ -4,8 +4,6 @@ repository, repo: 倉庫
 
 commit: 遞交 提交
 
-tracked/untracked
-
 staged: 預存 暫存
 
 ## 初始設定
@@ -14,12 +12,25 @@ staged: 預存 暫存
 $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
 ```
+其他設定
+```
+$ git config --global core.editor vim
+$ git config --global merge.tool=vimdiff
+```
 
 ### 列出個人設定
 ```bash
 git config --list
 ```
 git config --list命令列出所有 Git 在目前位置能找到的設定值:
+
+### 三種取得 Git 命令說明文件的方法:
+```bash
+$ git help <verb>
+$ git <verb> --help
+$ man git-<verb>
+```
+例如 $git help config
 
 ## 建立專案
 
@@ -121,14 +132,6 @@ $ git commit -a -m 'added new benchmarks'
 ```bash
 $ git push origin master
 ```
-
-### 三種取得 Git 命令說明文件的方法:
-```bash
-$ git help <verb>
-$ git <verb> --help
-$ man git-<verb>
-```
-例如 $git help config
 
 ## git clone 下載遠端repo
 1. 使用https
