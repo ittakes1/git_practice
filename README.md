@@ -1,9 +1,12 @@
 # git_practice
 
 repository, repo: 倉庫
+
 commit: 遞交 提交
+
 tracked/untracked
-add
+
+staged: 預存 暫存
 
 ## 初始設定
 安裝以後，設定使用者名稱和email
@@ -80,17 +83,25 @@ Your branch is up-to-date with 'origin/master'.
 
 ## 預存修改過的檔案 git add
 
-## 提交你的修改
+### 提交你的修改
 現在你的預存區已被建構成你想要的，你可以開始提交你的變更； 記住：任何未預暫存的檔案——新增的、已修改的，自從你編輯它們卻尚未用 git add 預存的——將不會納入本次的提交中； 它們仍以「已修改」的身份存在磁碟中。 在目前情況下，假設你上次執行 git status 時，你看到所有檔案都已經被預存，因此你準備提交你的變更。 最簡單的提交方式是輸入 git commit：
 ```bash
 $ git commit  # 這麼做會啟動你選定的編輯器
 ```
 或者
-```bash
+```
 $ git commit -m "Story 182: Fix benchmarks for speed" # -m 選項後方直接輸入提交訊息
 [master 463dc4f] Story 182: Fix benchmarks for speed  ← 提交到哪個分支（master）、提交的 SHA-1 校驗碼（463dc4f）
 2 files changed, 2 insertions(+) ←有多少檔案被更動，以及統計此提交有多少列被新增和被移除
 create mode 100644 README
+```
+
+### 略過預存區 git add + git commit一起用
+在 git commit 命令加上 -a 選項，使 Git 在提交前自動預存所有已追蹤的檔案，讓你略過 git add 步驟：`
+```
+$ git commit -a -m 'added new benchmarks'
+[master 83e38c7] added new benchmarks
+1 file changed, 5 insertions(+), 0 deletions(-)
 ```
 
 ## 將變更發送到遠端repo (例如github.com)
@@ -132,5 +143,32 @@ gitignore - Specifies intentionally untracked files to ignore
 
 * 目錄分隔符號/ is used as the directory separator. Separators may occur at the beginning, middle or end of the .gitignore search pattern.
 
+* 以/開頭以避免路徑遞迴。（只忽略特定路徑；如果不以斜線開頭，則不管同名檔案或同名資料夾在哪一層都會被忽略。）
+
+* 以/結尾代表是目錄。
+
 * glob模式： *, [abc], ?
+
+
+## 檢視已預存和未預存檔案的變更 git diff
+
+檢視尚未預存的變更
+
+想瞭解尚未預存的修改，輸入不帶其它參數的 git diff 這命令會比對「工作目錄」和「預存區」之間的版本， 然後顯示尚未被存入預存區的修改內容。
+```
+$ git diff
+```
+
+檢視已預存的變更
+
+如果你想檢視你已經預存而接下來將會被提交的內容，可以使用 git diff --staged； 這個命令比對的對象是「預存區」和「最後一次提交」
+```
+$ git diff --staged
+```
+
+使用外部工具
+```
+git difftool --tool-help
+git difftool --tool=vimdiff
+```
 
