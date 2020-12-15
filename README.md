@@ -15,7 +15,7 @@ $ git config --global user.email johndoe@example.com
 其他設定
 ```
 $ git config --global core.editor vim
-$ git config --global merge.tool=vimdiff
+$ git config --global merge.tool vimdiff
 ```
 
 ### git 別名
@@ -49,7 +49,7 @@ $ man git-<verb>
 
 2. 從伺服器上複製現有的Git倉庫
 
-### 1. 把現有專案匯入到git中
+### 方法1. 把現有專案匯入到git中
 在專案目錄底下：
 ```
 $ git init
@@ -63,7 +63,7 @@ git add .
 git commit -m "關於這次變更的敘述"
 ```
 
-### 2. 複製現有倉庫
+### 方法2. 複製現有倉庫
 
 git clone 下載遠端repo
 
@@ -79,6 +79,12 @@ $ git clone https://github.com/ittakes1/git_practice.git git_practice
 $ git clone git@github.com:ittakes1/git_practice.git
 ```
 說明 git clone git@網址:帳號名/項目名.git
+
+### 方法3. git remote add
+目錄底下：
+$ git init
+$ git remote add origin https://xxx.git
+$ git pull
 
 ## Git倉庫中記錄變更
 
